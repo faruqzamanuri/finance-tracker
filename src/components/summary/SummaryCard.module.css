@@ -1,0 +1,95 @@
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  padding: 0.9rem;
+  position: relative;
+}
+
+.card::before {
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 14%, transparent), transparent 68%);
+  content: '';
+  height: 110px;
+  position: absolute;
+  right: -54px;
+  top: -62px;
+  width: 132px;
+}
+
+.header {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 850;
+  justify-content: space-between;
+  position: relative;
+}
+
+.icon {
+  align-items: center;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--primary);
+  display: grid;
+  height: 2rem;
+  place-items: center;
+  width: 2rem;
+}
+
+.card strong {
+  color: var(--ink);
+  display: block;
+  font-size: clamp(1.25rem, 4vw, 1.9rem);
+  letter-spacing: -0.062em;
+  line-height: 1;
+  margin: 0.62rem 0 0.24rem;
+  position: relative;
+}
+
+.card small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  position: relative;
+}
+
+.featured {
+  background:
+    radial-gradient(circle at 86% 16%, rgba(255,255,255,0.24), transparent 8rem),
+    linear-gradient(145deg, #111827, #2557ff 52%, #4f46e5);
+  border: 0;
+  box-shadow: var(--shadow-sm);
+  color: white;
+  min-height: 156px;
+  padding: 1rem;
+}
+
+.featured::before {
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 24px;
+  height: 72px;
+  right: 0.9rem;
+  top: 4.4rem;
+  transform: rotate(-10deg);
+  width: 118px;
+}
+
+.featured .header,
+.featured small,
+.featured strong { color: white; }
+.featured .icon { background: rgba(255, 255, 255, 0.16); border-color: rgba(255,255,255,0.22); color: white; }
+.featured strong { font-size: clamp(1.9rem, 5vw, 2.75rem); margin-top: 1.2rem; }
+
+.income::before { background: radial-gradient(circle, var(--income-soft), transparent 68%); }
+.expense::before { background: radial-gradient(circle, var(--expense-soft), transparent 68%); }
+.income .icon, .income strong { color: var(--income); }
+.expense .icon, .expense strong { color: var(--expense); }
+
+@media (max-width: 760px) {
+  .card { border-radius: 20px; padding: 0.82rem; }
+  .featured { min-height: 162px; }
+}
