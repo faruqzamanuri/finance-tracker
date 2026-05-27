@@ -1,0 +1,75 @@
+.toolbar,
+.feedCard {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+  padding: 0.9rem;
+}
+
+.toolbar {
+  align-items: center;
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: auto minmax(220px, 1fr);
+}
+
+.chipStack { display: grid; gap: 0.45rem; }
+
+.chips {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  display: flex;
+  gap: 0.28rem;
+  padding: 0.28rem;
+}
+
+.chips button {
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 950;
+  min-height: 38px;
+  padding: 0.48rem 0.78rem;
+  transition: background 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+
+.chips .active {
+  background: var(--surface);
+  box-shadow: var(--shadow-xs);
+  color: var(--primary-dark);
+}
+
+.chips button:active { transform: scale(0.98); }
+
+.search {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  display: flex;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 0.82rem;
+}
+
+.search span { color: var(--primary); font-weight: 950; }
+.search input { background: transparent; border: 0; color: var(--ink); outline: none; width: 100%; }
+.search input::placeholder { color: var(--muted); }
+
+.feedHeader { align-items: center; display: flex; justify-content: space-between; margin-bottom: 0.72rem; }
+.feedHeader h2 { color: var(--ink); font-size: 1.12rem; letter-spacing: -0.05em; margin: 0.06rem 0 0; }
+.feedHeader > span { background: var(--surface-muted); border: 1px solid var(--border); border-radius: 999px; color: var(--text-soft); font-size: 0.76rem; font-weight: 900; padding: 0.36rem 0.62rem; text-transform: capitalize; }
+
+@media (max-width: 760px) {
+  .toolbar,
+  .feedCard { border-radius: 22px; padding: 0.82rem; }
+  .toolbar { grid-template-columns: 1fr; }
+  .chips { border-radius: 18px; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .chipStack .chips:first-child { grid-template-columns: repeat(2, 1fr); }
+  .chips button { border-radius: 14px; padding-inline: 0.4rem; }
+  .search { border-radius: 17px; }
+}

@@ -1,7 +1,6 @@
 import { getCategoryEmoji, groupTransactionsByDate } from '../../utils/analytics'
 import { TRANSACTION_TYPES } from '../../data/categories'
 import { formatCurrency } from '../../utils/currency'
-import { formatDate } from '../../utils/date'
 import EmptyState from '../ui/EmptyState'
 import styles from './TransactionTable.module.css'
 
@@ -17,7 +16,7 @@ export default function TransactionTable({ transactions, onDelete }) {
       {Object.entries(groupedTransactions).map(([date, dateTransactions]) => (
         <section className={styles.group} key={date}>
           <div className={styles.groupHeader}>
-            <h3>{formatDate(date)}</h3>
+            <h3>{date}</h3>
             <span>{dateTransactions.length} item{dateTransactions.length > 1 ? 's' : ''}</span>
           </div>
 
@@ -43,7 +42,7 @@ export default function TransactionTable({ transactions, onDelete }) {
 
                     <div className={styles.metaRow}>
                       <span className={`${styles.pill} ${isIncome ? styles.income : styles.expense}`}>{transaction.type}</span>
-                      <span className={styles.note}>{transaction.note || 'Ready for swipe/edit later'}</span>
+                      <span className={styles.note}>{date === 'Earlier' ? `${transaction.date} · ` : ''}{transaction.note || transaction.category}</span>
                       <button className={styles.deleteButton} onClick={() => onDelete(transaction.id)} type="button">
                         Delete
                       </button>

@@ -1,21 +1,26 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { CATEGORIES, TRANSACTION_TYPES } from '../../data/categories'
 import styles from './TransactionForm.module.css'
 
-const initialFormState = {
+const createInitialFormState = (type = TRANSACTION_TYPES.EXPENSE) => ({
   title: '',
   amount: '',
-  type: TRANSACTION_TYPES.EXPENSE,
-  category: CATEGORIES.expense[0],
+  type,
+  category: CATEGORIES[type][0],
   date: new Date().toISOString().slice(0, 10),
   note: '',
-}
+})
 
-export default function TransactionForm({ onSubmit }) {
-  const [formData, setFormData] = useState(initialFormState)
+export default function TransactionForm({ defaultType = TRANSACTION_TYPES.EXPENSE, formId = 'add-transaction', onSubmit }) {
+  const [formData, setFormData] = useState(() => createInitialFormState(defaultType))
   const [validationError, setValidationError] = useState('')
 
   const availableCategories = useMemo(() => CATEGORIES[formData.type], [formData.type])
+
+  useEffect(() => {
+    setFormData(createInitialFormState(defaultType))
+    setValidationError('')
+  }, [defaultType])
 
   const updateField = (field, value) => {
     setFormData((currentData) => ({ ...currentData, [field]: value }))
@@ -44,11 +49,11 @@ export default function TransactionForm({ onSubmit }) {
     }
 
     onSubmit({ ...formData, title: formData.title.trim(), note: formData.note.trim() })
-    setFormData(initialFormState)
+    setFormData(createInitialFormState(defaultType))
   }
 
   return (
-    <form className={styles.form} id="add-transaction" onSubmit={handleSubmit}>
+    <form className={styles.form} id={formId} onSubmit={handleSubmit}>
       <div className={styles.header}>
         <div>
           <span className="eyebrow">Quick add</span>

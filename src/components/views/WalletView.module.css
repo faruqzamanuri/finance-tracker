@@ -1,0 +1,128 @@
+.heroGrid,
+.contentGrid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+}
+
+.walletCard,
+.cashFlowCard,
+.previewCard,
+.trendCard,
+.monthSwitcher,
+.metricGrid article {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+  padding: 1rem;
+}
+
+.walletCard {
+  background:
+    radial-gradient(circle at 86% 10%, rgba(255,255,255,0.26), transparent 8rem),
+    linear-gradient(135deg, var(--primary), var(--violet));
+  color: white;
+  min-height: 190px;
+  overflow: hidden;
+  position: relative;
+}
+
+.walletCard::after {
+  background: rgba(255,255,255,0.16);
+  border-radius: 999px;
+  content: '';
+  height: 180px;
+  position: absolute;
+  right: -70px;
+  top: -60px;
+  width: 180px;
+}
+
+.cardLabel { color: rgba(255,255,255,0.74); font-size: 0.75rem; font-weight: 950; letter-spacing: 0.12em; text-transform: uppercase; }
+.walletCard strong { display: block; font-size: clamp(2rem, 6vw, 3.2rem); letter-spacing: -0.08em; margin-top: 1.3rem; }
+.cardFooter { align-items: center; bottom: 1rem; display: flex; font-size: 0.82rem; font-weight: 850; gap: 0.75rem; justify-content: space-between; left: 1rem; position: absolute; right: 1rem; }
+
+.monthSwitcher { align-items: center; display: flex; justify-content: space-between; padding: 0.42rem; }
+.monthLabelButton {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-xs);
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 950;
+  letter-spacing: -0.035em;
+  min-height: 42px;
+  padding: 0.55rem 1.05rem;
+  transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}
+.monthLabelButton::after { color: var(--primary); content: ' ▾'; font-size: 0.78rem; }
+.monthSwitcher > button:not(.monthLabelButton) { background: var(--surface-muted); border: 1px solid var(--border); border-radius: 999px; color: var(--ink); font-size: 1.3rem; font-weight: 950; height: 40px; width: 40px; }
+.monthSwitcher button:active { transform: scale(0.96); }
+.monthLabelButton:hover { background: var(--surface); box-shadow: var(--shadow-sm); }
+
+.cashFlowCard { display: grid; align-content: center; gap: 0.95rem; }
+.cardHeader { align-items: center; display: flex; gap: 0.8rem; justify-content: space-between; }
+.cardHeader span { color: var(--text-soft); font-weight: 950; }
+.cardHeader strong { color: var(--ink); font-size: 1.35rem; letter-spacing: -0.055em; }
+.flowTrack { background: var(--surface-muted); border-radius: 999px; display: flex; height: 18px; overflow: hidden; }
+.flowTrack i { display: block; min-width: 5%; transition: width 0.22s ease; }
+.incomeBar { background: linear-gradient(90deg, var(--income), var(--teal)); }
+.expenseBar { background: linear-gradient(90deg, var(--expense), #f97316); }
+.flowLegend { display: grid; gap: 0.56rem; grid-template-columns: 1fr 1fr; }
+.flowLegend span { background: var(--surface-muted); border-radius: 16px; color: var(--text-soft); display: grid; font-size: 0.78rem; font-weight: 850; gap: 0.16rem; padding: 0.66rem; }
+.flowLegend strong { color: var(--ink); font-size: 0.92rem; letter-spacing: -0.035em; }
+.incomeDot,
+.expenseDot { border-radius: 999px; height: 8px; width: 8px; }
+.incomeDot { background: var(--income); }
+.expenseDot { background: var(--expense); }
+
+.metricGrid { display: grid; gap: 0.75rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.metricGrid article { padding: 0.85rem; }
+.metricGrid span { color: var(--muted); display: block; font-size: 0.72rem; font-weight: 950; letter-spacing: 0.1em; text-transform: uppercase; }
+.metricGrid strong { color: var(--ink); display: block; font-size: 1.08rem; letter-spacing: -0.045em; margin-top: 0.18rem; }
+
+.sectionHeader { align-items: center; display: flex; justify-content: space-between; margin-bottom: 0.72rem; }
+.sectionHeader h2 { color: var(--ink); font-size: 1.12rem; letter-spacing: -0.05em; margin: 0.06rem 0 0; }
+.sectionHeader button { background: var(--surface-muted); border: 1px solid var(--border); border-radius: 999px; color: var(--primary-dark); font-size: 0.76rem; font-weight: 950; padding: 0.42rem 0.66rem; }
+.recentList { display: grid; gap: 0.52rem; }
+.recentItem { align-items: center; background: color-mix(in srgb, var(--surface-muted) 55%, transparent); border: 1px solid var(--border); border-radius: 18px; display: grid; gap: 0.6rem; grid-template-columns: 40px minmax(0, 1fr) auto; padding: 0.58rem; }
+.recentItem span { align-items: center; border-radius: 14px; display: grid; height: 40px; place-items: center; width: 40px; }
+.incomeIcon { background: var(--income-soft); }
+.expenseIcon { background: var(--expense-soft); }
+.recentItem strong { color: var(--ink); display: block; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recentItem small { color: var(--muted); display: block; font-size: 0.76rem; }
+.recentItem b { border-radius: 999px; font-size: 0.86rem; padding: 0.18rem 0.42rem; }
+.incomeText { background: var(--income-soft); color: var(--income); }
+.expenseText { background: var(--expense-soft); color: var(--expense); }
+.empty { color: var(--muted); margin: 0; }
+
+.topSpendVisual { align-items: center; display: grid; gap: 0.78rem; grid-template-columns: 56px minmax(0, 1fr); }
+.topSpendVisual > span { align-items: center; background: var(--expense-soft); border-radius: 20px; display: grid; font-size: 1.45rem; height: 56px; place-items: center; width: 56px; }
+.topSpendVisual strong { color: var(--ink); display: block; font-size: 1.05rem; letter-spacing: -0.04em; }
+.topSpendVisual p { color: var(--text-soft); font-weight: 850; margin: 0.08rem 0 0.44rem; }
+.trendTrack { background: var(--surface-muted); border-radius: 999px; height: 9px; overflow: hidden; }
+.trendTrack i { background: linear-gradient(90deg, var(--primary), var(--violet)); border-radius: inherit; display: block; height: 100%; }
+.savingsVisual { align-items: center; display: flex; gap: 0.8rem; }
+.savingsVisual p { color: var(--text-soft); font-weight: 800; margin: 0; }
+.ring { align-items: center; background: radial-gradient(circle at center, var(--surface) 0 55%, transparent 56%), conic-gradient(var(--primary) var(--progress), var(--surface-muted) 0deg); border-radius: 50%; display: grid; flex: 0 0 auto; height: 62px; place-items: center; width: 62px; }
+.ring span { color: var(--ink); font-size: 0.8rem; font-weight: 950; }
+
+@media (max-width: 980px) {
+  .heroGrid,
+  .contentGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .walletCard,
+  .cashFlowCard,
+  .previewCard,
+  .trendCard,
+  .monthSwitcher,
+  .metricGrid article { border-radius: 22px; padding: 0.82rem; }
+  .walletCard { min-height: 172px; }
+  .cardFooter { align-items: flex-start; flex-direction: column; gap: 0.12rem; }
+  .flowLegend,
+  .metricGrid { grid-template-columns: 1fr; }
+}

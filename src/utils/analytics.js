@@ -39,10 +39,28 @@ export const getSavingsRate = ({ income, balance }) => {
   return Math.max(-100, Math.min(100, Math.round((balance / income) * 100)))
 }
 
+const toDateKey = (date) => {
+  const value = date instanceof Date ? date : new Date(`${date}T00:00:00`)
+  const month = String(value.getMonth() + 1).padStart(2, '0')
+  const day = String(value.getDate()).padStart(2, '0')
+  return `${value.getFullYear()}-${month}-${day}`
+}
+
+const getRelativeDateGroup = (date) => {
+  const today = new Date()
+  const yesterday = new Date()
+  yesterday.setDate(today.getDate() - 1)
+
+  const transactionKey = toDateKey(date)
+  if (transactionKey === toDateKey(today)) return 'Today'
+  if (transactionKey === toDateKey(yesterday)) return 'Yesterday'
+  return 'Earlier'
+}
+
 export const groupTransactionsByDate = (transactions) =>
   transactions.reduce((groups, transaction) => {
-    const date = transaction.date
-    if (!groups[date]) groups[date] = []
-    groups[date].push(transaction)
+    const group = getRelativeDateGroup(transaction.date)
+    if (!groups[group]) groups[group] = []
+    groups[group].push(transaction)
     return groups
   }, {})

@@ -96,7 +96,7 @@ h1, h2, h3, p { margin-top: 0; }
 #overview,
 #add-transaction,
 #activity,
-#insights { scroll-margin-top: 6rem; }
+#trends { scroll-margin-top: 6rem; }
 
 @media (max-width: 760px) {
   body { background: linear-gradient(180deg, var(--app-bg) 0%, var(--bg) 100%); }

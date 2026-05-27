@@ -1,0 +1,18 @@
+.list { display: grid; gap: 0.58rem; }
+.row {
+  align-items: center;
+  background: color-mix(in srgb, var(--surface-muted) 54%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  display: grid;
+  gap: 0.68rem;
+  grid-template-columns: 42px minmax(0, 1fr);
+  padding: 0.62rem;
+}
+.icon { align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 15px; display: grid; height: 42px; place-items: center; width: 42px; }
+.content { min-width: 0; }
+.meta { align-items: center; display: flex; gap: 0.65rem; justify-content: space-between; }
+.meta strong { color: var(--ink); font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.meta span { color: var(--text-soft); flex: 0 0 auto; font-size: 0.82rem; font-weight: 900; }
+.track { background: var(--surface); border-radius: 999px; height: 8px; margin-top: 0.35rem; overflow: hidden; }
+.track i { background: linear-gradient(90deg, var(--primary), var(--teal)); border-radius: inherit; display: block; height: 100%; transition: width 0.2s ease; }

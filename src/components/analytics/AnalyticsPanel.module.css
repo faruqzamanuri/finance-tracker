@@ -105,8 +105,10 @@
 .categoryMeta strong { color: var(--ink); font-size: 0.86rem; }
 .categoryMeta span { color: var(--muted); font-size: 0.8rem; font-weight: 850; }
 .track { background: var(--surface); border-radius: 999px; height: 7px; margin-top: 0.34rem; overflow: hidden; }
-.track i { background: linear-gradient(90deg, var(--primary), var(--violet)); border-radius: inherit; display: block; height: 100%; }
+.track i { background: linear-gradient(90deg, var(--primary), var(--violet)); border-radius: inherit; display: block; height: 100%; transition: width 0.22s ease; }
 .empty { color: var(--muted); margin: 0; }
+.compact .categories { display: none; }
+.compact { align-content: start; }
 
 @media (max-width: 760px) {
   .panel { border-radius: 22px; gap: 0.68rem; padding: 0.82rem; }

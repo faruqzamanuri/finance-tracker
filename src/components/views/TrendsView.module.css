@@ -1,0 +1,34 @@
+.highlightGrid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.highlightCard {
+  align-items: center;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 52px minmax(0, 1fr);
+  padding: 0.9rem;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.highlightCard:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+.icon { align-items: center; background: var(--primary-soft); border-radius: 18px; color: var(--primary-dark); display: grid; font-size: 1.35rem; height: 52px; place-items: center; width: 52px; }
+.highlightCard small { color: var(--muted); display: block; font-size: 0.68rem; font-weight: 950; letter-spacing: 0.12em; text-transform: uppercase; }
+.highlightCard strong { color: var(--ink); display: block; font-size: 1.05rem; letter-spacing: -0.045em; margin-top: 0.08rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.highlightCard p { color: var(--text-soft); font-size: 0.82rem; font-weight: 800; margin: 0.18rem 0 0; }
+
+@media (max-width: 980px) {
+  .highlightGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .highlightGrid { gap: 0.64rem; }
+  .highlightCard { border-radius: 22px; grid-template-columns: 46px minmax(0, 1fr); padding: 0.78rem; }
+  .icon { border-radius: 16px; height: 46px; width: 46px; }
+}

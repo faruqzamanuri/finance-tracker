@@ -2,7 +2,7 @@ import { getSavingsRate, getSpendingByCategory } from '../../utils/analytics'
 import { formatCurrency } from '../../utils/currency'
 import styles from './AnalyticsPanel.module.css'
 
-export default function AnalyticsPanel({ transactions, monthlyTotals }) {
+export default function AnalyticsPanel({ compact = false, transactions, monthlyTotals }) {
   const spendingByCategory = getSpendingByCategory(transactions).slice(0, 5)
   const largestCategory = spendingByCategory[0]?.amount || 1
   const totalFlow = monthlyTotals.income + monthlyTotals.expense || 1
@@ -12,18 +12,18 @@ export default function AnalyticsPanel({ transactions, monthlyTotals }) {
   const savingsProgress = Math.max(0, Math.min(100, savingsRate))
 
   return (
-    <section className={styles.panel} id="insights" aria-label="Financial analytics">
+    <section className={`${styles.panel} ${compact ? styles.compact : ''}`} aria-label="Financial trends">
       <div className={styles.header}>
         <div>
-          <span className="eyebrow">Analytics</span>
-          <h2>Money pulse</h2>
+          <span className="eyebrow">Trends</span>
+          <h2>{compact ? 'Mini trend' : 'Visual dashboard'}</h2>
         </div>
         <strong>{savingsRate}% saved</strong>
       </div>
 
       <div className={styles.flowCard}>
         <div className={styles.flowHeader}>
-          <span>Income vs expense</span>
+          <span>Cash flow</span>
           <small>This month</small>
         </div>
         <div className={styles.flowBars}>
@@ -48,7 +48,7 @@ export default function AnalyticsPanel({ transactions, monthlyTotals }) {
 
       <div className={styles.categories}>
         <div className={styles.subHeader}>
-          <h3>Spending by category</h3>
+          <h3>Category mix</h3>
           <span>{spendingByCategory.length} categories</span>
         </div>
 

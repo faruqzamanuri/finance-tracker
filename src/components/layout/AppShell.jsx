@@ -1,50 +1,18 @@
 import { useState } from 'react'
-import { useSectionNavigation } from '../../hooks/useSectionNavigation'
+import AppNavigation from '../navigation/AppNavigation'
 import { useTheme } from '../../hooks/useTheme'
 import styles from './AppShell.module.css'
 
-const navItems = [
-  { id: 'overview', label: 'Home' },
-  { id: 'activity', label: 'Activity' },
-  { id: 'insights', label: 'Insights' },
-]
-
-const sectionIds = ['overview', 'add-transaction', 'activity', 'insights']
-
-export default function AppShell({ children }) {
+export default function AppShell({ activeView, children, onAddTransactionClick, onViewChange }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
-  const { activeSection, scrollToSection } = useSectionNavigation(sectionIds)
 
   const closeDrawer = () => setIsDrawerOpen(false)
 
-  const handleNavClick = (event, sectionId) => {
-    event.preventDefault()
-    scrollToSection(sectionId)
+  const handleViewChange = (viewId) => {
+    onViewChange(viewId)
     closeDrawer()
   }
-
-  const handleAddClick = (event) => {
-    event.preventDefault()
-    scrollToSection('add-transaction')
-
-    window.setTimeout(() => {
-      const firstField = document.querySelector('#add-transaction input, #add-transaction select, #add-transaction textarea')
-      firstField?.focus({ preventScroll: true })
-    }, 450)
-  }
-
-  const renderNavItems = (items = navItems) =>
-    items.map((item) => (
-      <a
-        className={activeSection === item.id ? styles.active : ''}
-        href={`#${item.id}`}
-        key={item.id}
-        onClick={(event) => handleNavClick(event, item.id)}
-      >
-        {item.label}
-      </a>
-    ))
 
   return (
     <div className={styles.shell}>
@@ -59,9 +27,9 @@ export default function AppShell({ children }) {
           <span />
         </button>
 
-        <button className={styles.mobileTitle} onClick={(event) => handleNavClick(event, 'overview')} type="button">
+        <button className={styles.mobileTitle} onClick={() => handleViewChange('dashboard')} type="button">
           <strong>FinWise</strong>
-          <small>Money app</small>
+          <small>{activeView === 'dashboard' ? 'Dashboard' : activeView === 'budget' ? 'Budget' : activeView === 'trends' ? 'Trends' : 'Activity'}</small>
         </button>
 
         <button
@@ -76,19 +44,19 @@ export default function AppShell({ children }) {
 
       <aside className={`${styles.sidebar} ${isDrawerOpen ? styles.drawerOpen : ''}`}>
         <div className={styles.brandRow}>
-          <button className={styles.brand} onClick={(event) => handleNavClick(event, 'overview')} type="button">
+          <button className={styles.brand} onClick={() => handleViewChange('dashboard')} type="button">
             <span className={styles.logo}>₿</span>
             <span>
               <strong>FinWise</strong>
-              <small>Personal finance</small>
+              <small>Monthly budgeting</small>
             </span>
           </button>
           <button className={styles.closeButton} onClick={closeDrawer} type="button">×</button>
         </div>
 
-        <nav className={styles.nav} aria-label="Primary navigation">
-          {renderNavItems()}
-        </nav>
+        <div className={styles.navWrap}>
+          <AppNavigation activeView={activeView} onViewChange={handleViewChange} />
+        </div>
 
         <button
           aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
@@ -101,9 +69,9 @@ export default function AppShell({ children }) {
         </button>
 
         <div className={styles.insightCard}>
-          <span>Today</span>
-          <strong>Your biggest spending category updates as transactions change.</strong>
-          <small>Insights are ready for charts, budgets and search.</small>
+          <span>Trends</span>
+          <strong>Safe-to-spend, category mix, and savings pace update live.</strong>
+          <small>No routing needed — switch tabs instantly.</small>
         </div>
       </aside>
 
@@ -111,15 +79,13 @@ export default function AppShell({ children }) {
 
       <main className={styles.main}>{children}</main>
 
-      {activeSection !== 'add-transaction' ? (
-        <button className={styles.fab} onClick={handleAddClick} aria-label="Add transaction" type="button">
-          +
-        </button>
-      ) : null}
+      <button className={styles.fab} onClick={onAddTransactionClick} aria-label="Add transaction" type="button">
+        +
+      </button>
 
-      <nav className={styles.bottomNav} aria-label="Mobile navigation">
-        {renderNavItems(navItems)}
-      </nav>
+      <div className={styles.bottomNav}>
+        <AppNavigation activeView={activeView} onViewChange={handleViewChange} />
+      </div>
     </div>
   )
 }
