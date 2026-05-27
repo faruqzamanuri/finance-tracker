@@ -1,116 +1,40 @@
-.panel {
-  background: var(--surface-raised);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-xs);
-  display: grid;
-  gap: 0.78rem;
-  padding: 0.9rem;
-}
-
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-xs); display: grid; gap: 0.78rem; padding: 0.9rem; }
 .header,
 .flowHeader,
 .flowLegend,
 .subHeader,
 .categoryMeta,
-.savingsCard {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  gap: 0.8rem;
-}
-
-.header h2 {
-  color: var(--ink);
-  font-size: 1.14rem;
-  letter-spacing: -0.052em;
-  line-height: 1.1;
-  margin: 0.06rem 0 0;
-}
-
-.header > strong {
-  background: var(--income-soft);
-  border-radius: 999px;
-  color: var(--income);
-  font-size: 0.78rem;
-  padding: 0.38rem 0.62rem;
-}
-
+.savingsCard { align-items: center; display: flex; justify-content: space-between; gap: 0.8rem; }
+.header h2 { color: var(--ink); font-size: 1.08rem; letter-spacing: -0.03em; line-height: 1.1; margin: 0.06rem 0 0; }
+.header > strong { background: var(--income-soft); border-radius: 999px; color: var(--income); font-size: 0.78rem; padding: 0.38rem 0.62rem; }
 .flowCard,
 .savingsCard,
-.categories {
-  background: color-mix(in srgb, var(--surface-muted) 55%, transparent);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 0.82rem;
-}
-
+.categories { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 0.82rem; }
 .flowHeader span,
-.savingsCard span {
-  color: var(--ink);
-  font-size: 0.9rem;
-  font-weight: 900;
-}
-
+.savingsCard span { color: var(--ink); font-size: 0.9rem; font-weight: 700; }
 .flowHeader small,
 .flowLegend,
-.subHeader span {
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
-.flowBars {
-  background: var(--surface);
-  border-radius: 999px;
-  display: flex;
-  height: 12px;
-  margin: 0.78rem 0 0.62rem;
-  overflow: hidden;
-}
-
-.incomeBar { background: linear-gradient(90deg, var(--income), #22c55e); }
-.expenseBar { background: linear-gradient(90deg, var(--expense), #f97316); }
+.subHeader span { color: var(--muted); font-size: 0.78rem; font-weight: 600; }
+.flowBars { background: var(--surface-muted); border-radius: 999px; display: flex; height: 10px; margin: 0.78rem 0 0.62rem; overflow: hidden; }
+.incomeBar { background: var(--income); }
+.expenseBar { background: var(--expense); }
 .flowLegend span { align-items: center; display: inline-flex; gap: 0.35rem; }
 .flowLegend i { border-radius: 999px; display: inline-block; height: 8px; width: 8px; }
 .incomeDot { background: var(--income); }
 .expenseDot { background: var(--expense); }
-
-.savingsCard strong {
-  color: var(--ink);
-  display: block;
-  font-size: 1.35rem;
-  letter-spacing: -0.06em;
-  margin-top: 0.1rem;
-}
-
-.ring {
-  align-items: center;
-  background:
-    radial-gradient(circle at center, var(--surface) 0 55%, transparent 56%),
-    conic-gradient(var(--primary) var(--progress), var(--surface-muted) 0deg);
-  border-radius: 50%;
-  display: grid;
-  height: 58px;
-  place-items: center;
-  width: 58px;
-}
-
-.ring span { color: var(--ink); font-size: 0.78rem; font-weight: 950; }
+.savingsCard strong { color: var(--ink); display: block; font-size: 1.35rem; letter-spacing: -0.05em; margin-top: 0.1rem; }
+.ring { align-items: center; background: var(--surface-muted); border-radius: 999px; display: grid; height: 42px; place-items: center; width: 42px; }
+.ring span { color: var(--ink); font-size: 0.76rem; font-weight: 700; }
 .subHeader { margin-bottom: 0.72rem; }
-.subHeader h3 { color: var(--ink); font-size: 0.95rem; letter-spacing: -0.03em; margin: 0; }
+.subHeader h3 { color: var(--ink); font-size: 0.95rem; letter-spacing: -0.02em; margin: 0; }
 .categoryRow { align-items: center; display: grid; gap: 0.66rem; grid-template-columns: 38px minmax(0, 1fr); }
 .categoryRow + .categoryRow { margin-top: 0.68rem; }
-.emoji { align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; display: grid; height: 38px; place-items: center; width: 38px; }
+.emoji { align-items: center; background: var(--surface-muted); border-radius: 12px; display: grid; height: 38px; place-items: center; width: 38px; }
 .categoryMeta strong { color: var(--ink); font-size: 0.86rem; }
-.categoryMeta span { color: var(--muted); font-size: 0.8rem; font-weight: 850; }
-.track { background: var(--surface); border-radius: 999px; height: 7px; margin-top: 0.34rem; overflow: hidden; }
-.track i { background: linear-gradient(90deg, var(--primary), var(--violet)); border-radius: inherit; display: block; height: 100%; transition: width 0.22s ease; }
+.categoryMeta span { color: var(--muted); font-size: 0.8rem; font-weight: 700; }
+.track { background: var(--surface-muted); border-radius: 999px; height: 7px; margin-top: 0.34rem; overflow: hidden; }
+.track i { background: var(--primary); border-radius: inherit; display: block; height: 100%; transition: width 0.22s ease; }
 .empty { color: var(--muted); margin: 0; }
 .compact .categories { display: none; }
 .compact { align-content: start; }
-
-@media (max-width: 760px) {
-  .panel { border-radius: 22px; gap: 0.68rem; padding: 0.82rem; }
-  .flowCard, .savingsCard, .categories { border-radius: 18px; padding: 0.76rem; }
-}
+@media (max-width: 760px) { .panel { border-radius: 20px; gap: 0.68rem; padding: 0.82rem; } .flowCard, .savingsCard, .categories { border-radius: 16px; padding: 0.76rem; } }

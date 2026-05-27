@@ -1,34 +1,42 @@
 .topRow { align-items: center; display: flex; justify-content: space-between; gap: 0.75rem; }
-.bell { align-items: center; background: var(--surface-raised); border: 1px solid var(--border); border-radius: 999px; box-shadow: var(--shadow-xs); color: var(--income); display: grid; height: 42px; place-items: center; width: 42px; }
 .safeCard,
 .statusCard,
-.card { background: var(--surface-raised); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-xs); padding: 0.9rem; }
-.safeCard { background: radial-gradient(circle at top, color-mix(in srgb, var(--income) 9%, transparent), transparent 14rem), var(--surface-raised); }
-.statusCard { align-items: center; display: grid; gap: 0.68rem; grid-template-columns: 44px minmax(0, 1fr); }
-.statusCard > span { align-items: center; background: var(--primary-soft); border-radius: 16px; display: grid; height: 44px; place-items: center; width: 44px; }
-.statusCard strong { color: var(--ink); display: block; font-size: 0.98rem; letter-spacing: -0.035em; }
-.statusCard small { color: var(--text-soft); display: block; font-weight: 800; margin-top: 0.08rem; }
+.card,
+.metrics article {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+  padding: 0.9rem;
+}
+.safeCard { padding: 1rem; }
+.metrics { display: grid; gap: 0.65rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.metrics span { color: var(--muted); display: block; font-size: 0.78rem; font-weight: 600; }
+.metrics strong { color: var(--ink); display: block; font-size: 1rem; letter-spacing: -0.03em; margin-top: 0.16rem; }
+.statusCard strong { color: var(--ink); display: block; font-size: 0.96rem; letter-spacing: -0.02em; }
+.statusCard small { color: var(--text-soft); display: block; margin-top: 0.1rem; }
 .sectionHeader { align-items: center; display: flex; justify-content: space-between; margin-bottom: 0.72rem; }
-.sectionHeader h2 { color: var(--ink); font-size: 1.1rem; letter-spacing: -0.05em; margin: 0.06rem 0 0; }
-.sectionHeader button { background: var(--surface-muted); border: 1px solid var(--border); border-radius: 999px; color: var(--primary-dark); font-size: 0.76rem; font-weight: 950; padding: 0.42rem 0.66rem; }
+.sectionHeader h2 { color: var(--ink); font-size: 1.05rem; letter-spacing: -0.03em; margin: 0.06rem 0 0; }
+.sectionHeader button { background: var(--surface-muted); border: 1px solid var(--border); border-radius: 999px; color: var(--primary-dark); font-size: 0.78rem; font-weight: 700; padding: 0.42rem 0.66rem; }
 .recentList { display: grid; gap: 0.52rem; }
-.recentItem { align-items: center; background: color-mix(in srgb, var(--surface-muted) 54%, transparent); border: 1px solid var(--border); border-radius: 18px; display: grid; gap: 0.6rem; grid-template-columns: 40px minmax(0, 1fr) auto; padding: 0.58rem; }
-.recentItem span { align-items: center; border-radius: 14px; display: grid; height: 40px; place-items: center; width: 40px; }
+.recentItem { align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; display: grid; gap: 0.6rem; grid-template-columns: 38px minmax(0, 1fr) auto; padding: 0.58rem; }
+.recentItem span { align-items: center; border-radius: 12px; display: grid; height: 38px; place-items: center; width: 38px; }
 .incomeIcon { background: var(--income-soft); }
 .expenseIcon { background: var(--expense-soft); }
-.recentItem strong { color: var(--ink); display: block; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.recentItem small { color: var(--muted); display: block; font-size: 0.76rem; }
-.recentItem b { border-radius: 999px; font-size: 0.86rem; padding: 0.18rem 0.42rem; }
-.incomeText { background: var(--income-soft); color: var(--income); }
-.expenseText { background: var(--expense-soft); color: var(--expense); }
+.recentItem strong { color: var(--ink); display: block; font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recentItem small { color: var(--muted); display: block; font-size: 0.78rem; }
+.recentItem b { font-size: 0.9rem; white-space: nowrap; }
+.incomeText { color: var(--income); }
+.expenseText { color: var(--expense); }
 .empty { color: var(--muted); margin: 0; }
-
-@media (min-width: 920px) {
-  .safeCard { padding: 1.2rem; }
-}
 
 @media (max-width: 760px) {
   .safeCard,
   .statusCard,
-  .card { border-radius: 24px; padding: 0.82rem; }
+  .card,
+  .metrics article { border-radius: 20px; padding: 0.82rem; }
+}
+
+@media (max-width: 430px) {
+  .metrics { grid-template-columns: 1fr; }
 }

@@ -1,7 +1,6 @@
-import { getCategoryEmoji } from '../../utils/analytics'
+import { getCategoryEmoji, getSavingsRate } from '../../utils/analytics'
 import { TRANSACTION_TYPES } from '../../data/categories'
 import { formatCurrency } from '../../utils/currency'
-import CategorySpendingList from '../ui/CategorySpendingList'
 import MonthNavigator from '../ui/MonthNavigator'
 import SafeToSpendGauge from '../ui/SafeToSpendGauge'
 import ViewContainer from './ViewContainer'
@@ -10,6 +9,7 @@ import styles from './DashboardView.module.css'
 export default function DashboardView({ monthLabel, monthlyTotals, onMonthChange, onMonthSelect, onViewChange, selectedMonth, transactions }) {
   const safeToSpend = monthlyTotals.income - monthlyTotals.expense
   const recentTransactions = transactions.slice(0, 3)
+  const savingsRate = getSavingsRate(monthlyTotals)
   const statusText = transactions.length
     ? `${transactions.length} transaction${transactions.length === 1 ? '' : 's'} this month`
     : 'Start tracking this month'
@@ -21,30 +21,23 @@ export default function DashboardView({ monthLabel, monthlyTotals, onMonthChange
     <ViewContainer eyebrow="FinWise" title="Dashboard" subtitle="How much can you safely spend this month?">
       <div className={styles.topRow}>
         <MonthNavigator monthLabel={monthLabel} onMonthChange={onMonthChange} onMonthSelect={onMonthSelect} selectedMonth={selectedMonth} />
-        <span className={styles.bell}>●</span>
       </div>
 
       <section className={styles.safeCard}>
         <SafeToSpendGauge amount={safeToSpend} income={monthlyTotals.income} monthLabel={monthLabel} />
       </section>
 
+      <section className={styles.metrics} aria-label={`${monthLabel} summary`}>
+        <article><span>Income</span><strong>{formatCurrency(monthlyTotals.income)}</strong></article>
+        <article><span>Expenses</span><strong>{formatCurrency(monthlyTotals.expense)}</strong></article>
+        <article><span>Savings rate</span><strong>{savingsRate}%</strong></article>
+      </section>
+
       <section className={styles.statusCard}>
-        <span>💡</span>
         <div>
           <strong>{statusText}</strong>
           <small>{statusHint}</small>
         </div>
-      </section>
-
-      <section className={styles.card}>
-        <div className={styles.sectionHeader}>
-          <div>
-            <span className="eyebrow">Budget</span>
-            <h2>Top categories</h2>
-          </div>
-          <button onClick={() => onViewChange('budget')} type="button">Budget</button>
-        </div>
-        <CategorySpendingList transactions={transactions} limit={3} />
       </section>
 
       <section className={styles.card}>

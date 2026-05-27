@@ -4,17 +4,55 @@ import { formatCurrency } from '../../utils/currency'
 import ViewContainer from './ViewContainer'
 import styles from './TrendsView.module.css'
 
-export default function TrendsView({ monthLabel, monthlyTotals, transactions }) {
+const getPercentChange = (current, previous) => {
+  if (!previous && !current) return 0
+  if (!previous) return 100
+  return Math.round(((current - previous) / previous) * 100)
+}
+
+const getTrend = (change, inverse = false) => {
+  if (Math.abs(change) <= 2) return { icon: '→', label: 'Stable', tone: styles.stable }
+  const isUp = change > 0
+  const good = inverse ? !isUp : isUp
+  return {
+    icon: isUp ? '↑' : '↓',
+    label: `${Math.abs(change)}%`,
+    tone: good ? styles.good : styles.watch,
+  }
+}
+
+export default function TrendsView({ monthLabel, monthlyTotals, previousMonthTotals, previousTransactions, transactions }) {
   const topCategory = getSpendingByCategory(transactions)[0]
+  const previousTopCategories = getSpendingByCategory(previousTransactions)
+  const previousTopMatch = previousTopCategories.find((item) => item.category === topCategory?.category)
   const savingsRate = getSavingsRate(monthlyTotals)
+  const previousSavingsRate = getSavingsRate(previousMonthTotals)
   const biggestExpense = transactions
     .filter((transaction) => transaction.type === 'expense')
     .sort((a, b) => Number(b.amount) - Number(a.amount))[0]
   const totalFlow = monthlyTotals.income + monthlyTotals.expense || 1
   const expenseShare = Math.round((monthlyTotals.expense / totalFlow) * 100)
+  const spendingTrend = getTrend(getPercentChange(monthlyTotals.expense, previousMonthTotals.expense), true)
+  const savingsTrend = getTrend(savingsRate - previousSavingsRate)
+  const categoryTrend = topCategory ? getTrend(getPercentChange(topCategory.amount, previousTopMatch?.amount || 0), true) : null
 
   return (
-    <ViewContainer eyebrow="Trends" title="Monthly trends" subtitle={`${monthLabel} category mix, cash flow, and savings pace.`}>
+    <ViewContainer eyebrow="Trends" title="Monthly trends" subtitle={`${monthLabel} movement at a glance.`}>
+      <section className={styles.trendStrip}>
+        <article className={spendingTrend.tone}>
+          <span>{spendingTrend.icon}</span>
+          <div><small>Spending</small><strong>{spendingTrend.label}</strong></div>
+        </article>
+        <article className={savingsTrend.tone}>
+          <span>{savingsTrend.icon}</span>
+          <div><small>Savings rate</small><strong>{savingsTrend.label}</strong></div>
+        </article>
+        <article className={categoryTrend?.tone || styles.stable}>
+          <span>{categoryTrend?.icon || '→'}</span>
+          <div><small>{topCategory?.category || 'Categories'}</small><strong>{categoryTrend?.label || 'Stable'}</strong></div>
+        </article>
+      </section>
+
       <section className={styles.highlightGrid}>
         <article className={styles.highlightCard}>
           <span className={styles.icon}>{topCategory ? topCategory.emoji : '◌'}</span>

@@ -7,11 +7,10 @@ export default function MonthNavigator({ monthLabel, onMonthChange, onMonthSelec
 
   return (
     <div className={styles.wrap} aria-label="Month navigation">
-      <button onClick={() => onMonthChange(-1)} type="button" aria-label="Previous month">‹</button>
-      <button className={styles.label} onClick={() => setIsPickerOpen(true)} type="button" aria-label="Choose month">
-        {monthLabel}
-      </button>
-      <button onClick={() => onMonthChange(1)} type="button" aria-label="Next month">›</button>
+      <button className={styles.arrow} onClick={() => onMonthChange(-1)} type="button" aria-label="Previous month">‹</button>
+      <span className={styles.label} aria-live="polite">{monthLabel}</span>
+      <button className={styles.calendar} onClick={() => setIsPickerOpen(true)} type="button" aria-label="Choose month">▦</button>
+      <button className={styles.arrow} onClick={() => onMonthChange(1)} type="button" aria-label="Next month">›</button>
 
       <MonthPicker
         isOpen={isPickerOpen}

@@ -1,36 +1,20 @@
 .gauge {
   display: grid;
-  gap: 0.45rem;
-  justify-items: center;
+  gap: 0.8rem;
   width: 100%;
 }
 
-.arc {
-  align-items: end;
-  background:
-    radial-gradient(circle at 50% 100%, var(--surface-raised) 0 52%, transparent 53%),
-    conic-gradient(from 270deg, var(--income) var(--progress), var(--surface-muted) 0 180deg, transparent 0);
-  border-radius: 180px 180px 22px 22px;
-  display: grid;
-  height: 156px;
-  max-width: 320px;
-  overflow: hidden;
-  padding: 0 1rem 1rem;
-  place-items: end center;
-  width: 100%;
+.header {
+  align-items: start;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.valueBox {
-  background: var(--surface-raised);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  box-shadow: var(--shadow-xs);
-  padding: 0.78rem 1rem;
-  text-align: center;
-  width: min(230px, 90%);
-}
-
-.valueBox span { color: var(--muted); display: block; font-size: 0.7rem; font-weight: 950; letter-spacing: 0.12em; text-transform: uppercase; }
-.valueBox strong { color: var(--ink); display: block; font-size: clamp(1.65rem, 7vw, 2.35rem); letter-spacing: -0.08em; line-height: 1.05; margin-top: 0.18rem; }
-.valueBox small { color: var(--text-soft); display: block; font-weight: 850; margin-top: 0.16rem; }
-.scale { color: var(--muted); display: flex; font-size: 0.74rem; font-weight: 900; justify-content: space-between; max-width: 320px; width: 100%; }
+.header span { color: var(--text-soft); display: block; font-size: 0.88rem; font-weight: 600; }
+.header strong { color: var(--ink); display: block; font-size: clamp(2rem, 9vw, 2.75rem); letter-spacing: -0.07em; line-height: 1.02; margin-top: 0.12rem; }
+.header small { color: var(--muted); display: block; font-size: 0.84rem; margin-top: 0.18rem; }
+.header b { background: var(--income-soft); border-radius: 999px; color: var(--income); font-size: 0.82rem; padding: 0.32rem 0.52rem; }
+.track { background: var(--surface-muted); border-radius: 999px; height: 10px; overflow: hidden; }
+.track i { background: var(--income); border-radius: inherit; display: block; height: 100%; transition: width 0.22s ease; width: var(--available); }
+.footer { align-items: center; color: var(--text-soft); display: flex; font-size: 0.8rem; justify-content: space-between; width: 100%; }

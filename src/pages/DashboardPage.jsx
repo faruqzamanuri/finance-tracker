@@ -19,11 +19,17 @@ export default function DashboardPage() {
   const [selectedMonth, setSelectedMonth] = useState(getCurrentMonthKey)
   const { transactions, isLoading, error, addTransaction, removeTransaction } = useTransactions()
   const monthLabel = formatMonthLabel(selectedMonth)
+  const previousMonth = addMonths(selectedMonth, -1)
   const monthTransactions = useMemo(
     () => transactions.filter((transaction) => isSameMonth(transaction.date, selectedMonth)),
     [transactions, selectedMonth],
   )
+  const previousMonthTransactions = useMemo(
+    () => transactions.filter((transaction) => isSameMonth(transaction.date, previousMonth)),
+    [transactions, previousMonth],
+  )
   const selectedMonthTotals = useMemo(() => calculateTotals(monthTransactions), [monthTransactions])
+  const previousMonthTotals = useMemo(() => calculateTotals(previousMonthTransactions), [previousMonthTransactions])
 
   const handleMonthChange = (offset) => {
     setSelectedMonth((currentMonth) => addMonths(currentMonth, offset))
@@ -55,7 +61,17 @@ export default function DashboardPage() {
       return <ActivityView monthLabel={monthLabel} monthTransactions={monthTransactions} transactions={transactions} onDelete={removeTransaction} />
     }
 
-    if (activeView === 'trends') return <TrendsView monthLabel={monthLabel} transactions={monthTransactions} monthlyTotals={selectedMonthTotals} />
+    if (activeView === 'trends') {
+      return (
+        <TrendsView
+          monthLabel={monthLabel}
+          monthlyTotals={selectedMonthTotals}
+          previousMonthTotals={previousMonthTotals}
+          previousTransactions={previousMonthTransactions}
+          transactions={monthTransactions}
+        />
+      )
+    }
 
     return <DashboardView {...monthProps} onViewChange={setActiveView} />
   }
